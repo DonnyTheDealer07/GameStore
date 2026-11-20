@@ -1,0 +1,29 @@
+.brand-link,
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand-link {
+  width: fit-content;
+  border-radius: 4px;
+}
+
+.brand-logo img {
+  width: auto;
+  height: var(--brand-logo-height);
+  max-width: none;
+}
+
+@media (hover: hover) {
+  .brand-link:hover .brand-logo img {
+    filter: brightness(1.12) drop-shadow(0 0 6px #59d9ff3d);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .brand-link .brand-logo img {
+    transition: filter 220ms ease-out;
+  }
+}

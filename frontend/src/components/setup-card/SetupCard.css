@@ -1,0 +1,358 @@
+
+/* ==============================
+   NEONBYTE SETUP CARD
+============================== */
+
+.setup-card {
+  --card-accent: #f72585;
+  --card-glow: rgba(247, 37, 133, 0.25);
+
+  position: relative;
+  min-width: 0;
+  isolation: isolate;
+}
+
+.setup-card--cyan {
+  --card-accent: #59d9ff;
+  --card-glow: rgba(89, 217, 255, 0.25);
+}
+
+.setup-card--purple {
+  --card-accent: #a855f7;
+  --card-glow: rgba(168, 85, 247, 0.25);
+}
+
+/* Subtle background illumination */
+
+.setup-card::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 10px;
+  border-radius: 18px;
+
+  background: var(--card-accent);
+  opacity: 0.15;
+  filter: blur(28px);
+
+  transition:
+    opacity 0.4s ease,
+    filter 0.4s ease;
+}
+
+.setup-card:hover::before {
+  opacity: 0.4;
+  filter: blur(38px);
+}
+
+/* Card shell */
+
+.setup-card__link {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+
+  background: #1c102c;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.2);
+
+  transition:
+    border-color 0.4s ease,
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.setup-card__link:hover,
+.setup-card__link:focus-visible {
+  transform: translateY(-7px);
+
+  border-color: var(--card-accent);
+
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.32),
+    0 0 25px var(--card-glow);
+}
+
+/* Image container */
+
+.setup-card__image-wrap {
+  position: relative;
+
+  width: 100%;
+  min-height: 410px;
+  aspect-ratio: 3 / 4;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      var(--card-glow),
+      transparent 75%
+    ),
+    #151020;
+}
+
+/* Enhanced image clarity */
+
+.setup-card__image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  filter:
+    brightness(1.12)
+    contrast(1.07)
+    saturate(1.12);
+
+  transform: scale(1.001);
+
+  transition:
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.5s ease;
+}
+
+.setup-card__link:hover .setup-card__image,
+.setup-card__link:focus-visible .setup-card__image {
+  transform: scale(1.055);
+
+  filter:
+    brightness(1.18)
+    contrast(1.08)
+    saturate(1.16);
+}
+
+/* Soft ambient light.
+   Placed mostly at the edges so the photo
+   remains clear and visible.
+*/
+
+.setup-card__ambient {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      var(--card-glow) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 0% 100%,
+      var(--card-glow) 0%,
+      transparent 45%
+    );
+
+  opacity: 0.35;
+  mix-blend-mode: screen;
+
+  transition: opacity 0.4s ease;
+}
+
+.setup-card__link:hover .setup-card__ambient {
+  opacity: 0.65;
+}
+
+/* Much lighter image overlay.
+   Dark only at the bottom for readable text.
+*/
+
+.setup-card__shade {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 4, 17, 0.03) 0%,
+    rgba(7, 4, 17, 0.02) 35%,
+    rgba(7, 4, 17, 0.08) 50%,
+    rgba(7, 4, 17, 0.45) 72%,
+    rgba(7, 4, 17, 0.92) 100%
+  );
+}
+
+/* Soft bottom accent */
+
+.setup-card__image-wrap::after {
+  content: '';
+  position: absolute;
+  z-index: 3;
+
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--card-accent),
+    transparent
+  );
+
+  box-shadow: 0 0 15px var(--card-glow);
+  opacity: 0.75;
+}
+
+/* Top-right arrow */
+
+.setup-card__corner-icon {
+  position: absolute;
+  z-index: 4;
+  top: 22px;
+  right: 22px;
+
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+
+  background: rgba(11, 6, 21, 0.32);
+  backdrop-filter: blur(8px);
+
+  color: white;
+  font-size: 20px;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.setup-card__link:hover .setup-card__corner-icon {
+  transform: rotate(45deg);
+  background: var(--card-accent);
+  border-color: var(--card-accent);
+  color: #0b0615;
+}
+
+/* Card text */
+
+.setup-card__content {
+  position: absolute;
+  z-index: 4;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 30px;
+}
+
+.setup-card__title {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.7vw, 2.35rem);
+  font-weight: 700;
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
+}
+
+.setup-card__subtitle {
+  margin-top: 9px;
+  max-width: 280px;
+
+  color: #f1eaf7;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Explore link */
+
+.setup-card__explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 18px;
+  padding-bottom: 6px;
+
+  border-bottom: 1px solid var(--card-accent);
+
+  color: #ffffff;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+
+  transition:
+    gap 0.3s ease,
+    color 0.3s ease;
+}
+
+.setup-card__link:hover .setup-card__explore {
+  gap: 12px;
+  color: var(--card-accent);
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+  .setup-card__content {
+    padding: 22px;
+  }
+
+  .setup-card__image-wrap {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 650px) {
+  .setup-card__image-wrap {
+    aspect-ratio: 4 / 5;
+    min-height: 380px;
+  }
+
+  .setup-card__content {
+    padding: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .setup-card::before,
+  .setup-card__link,
+  .setup-card__image,
+  .setup-card__ambient,
+  .setup-card__shade,
+  .setup-card__corner-icon,
+  .setup-card__explore {
+    transition: none;
+  }
+
+  .setup-card__link:hover,
+  .setup-card__link:focus-visible,
+  .setup-card__link:hover .setup-card__image,
+  .setup-card__link:focus-visible .setup-card__image,
+  .setup-card__link:hover .setup-card__corner-icon {
+    transform: none;
+  }
+}
